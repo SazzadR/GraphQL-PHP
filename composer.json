@@ -1,0 +1,5 @@
+{
+    "require": {
+        "Youshido/GraphQL": "v1.4.3.4"
+    }
+}
