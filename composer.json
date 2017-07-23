@@ -1,5 +1,10 @@
 {
     "require": {
         "Youshido/GraphQL": "v1.4.3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Blog\\Schema\\": "Schema/"
+        }
     }
 }
