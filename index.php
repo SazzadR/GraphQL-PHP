@@ -4,6 +4,7 @@ namespace Blog;
 
 use Blog\Schema\LatestPostField;
 
+use Blog\Schema\PostType;
 use Youshido\GraphQL\Schema\Schema;
 use Youshido\GraphQL\Execution\Processor;
 use Youshido\GraphQL\Type\NonNullType;
@@ -23,12 +24,16 @@ $rootMutationType = new ObjectType([
     'name' => 'RootMutationType',
     'fields' => [
         'likePost' => [
-            'type' => new IntType(),
+            'type' => new PostType(),
             'args' => [
                 'id' => new NonNullType(new IntType())
             ],
             'resolve' => function () {
-                return 2;
+                return [
+                    'title'     => 'New approach in API has been revealed',
+                    'summary'   => 'In two words - GraphQL Rocks!',
+                    'likesCount' => 2
+                ];
             }
         ]
     ]
@@ -39,10 +44,10 @@ $processor = new Processor(new Schema([
     'mutation' => $rootMutationType
 ]));
 
-/*$payload = '{ latestPost {title, summary } }';
+/*$payload = '{ latestPost {title, summary, likesCount } }';
 $processor->processPayload($payload);
 echo json_encode($processor->getResponseData(), true);*/
 
-$payload = 'mutation { likePost(id: 5) }';
+$payload = 'mutation { likePost(id: 5) { title, likesCount } }';
 $processor->processPayload($payload);
 echo json_encode($processor->getResponseData(), true);

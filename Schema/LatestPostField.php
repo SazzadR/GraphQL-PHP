@@ -16,7 +16,8 @@ class LatestPostField extends AbstractField
     {
         return [
             'title' => 'New approach in API has been revealed',
-            'summary' => 'In two words - GraphQL Rocks!'
+            'summary' => 'In two words - GraphQL Rocks!',
+            'likesCount' => 2
         ];
     }
 }
